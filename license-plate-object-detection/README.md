@@ -6,3 +6,11 @@ The training of the data will be using NVIDIA GeForce GTX 1660 Ti device. But th
 2. Installing CuDNN version 8.3.0 (or pick other version that is compatible with CUDA Toolkit version, check this [link](https://developer.nvidia.com/rdp/cudnn-archive) for further information)
 3. Installing NVIDIA driver from this [link](https://www.nvidia.com/download/index.aspx) and choose the driver based on your GPU device name and type.
 4. Installing Visual Studio 2019 using this [link](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=download+from+relnotes&utm_content=vs2019ga+button) 
+
+## Setting Up Environment
+Python environment can be created using [anaconda](https://www.anaconda.com/) or [pipenv](https://pipenv.pypa.io/en/latest/) package by Python. In this project, pipenv is a tool that has been chosen for setting up environment. For starting things off, download the any Python version and then run ***pip install pipenv*** for installing pipenv package. Then setting up the environment at your project directory folder by running ***python -m pipenv --python 3.8.6***. Then you want to access or activate the environment using ***python -m pipenv shell***.
+
+Next, we need to install libaries to enable pytorch to access GPU by installing python packages by using this command
+***pip install torch==1.9.0+cu102 torchvision==0.10.0+cu102 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html***
+
+This command can be run in the jupyter notebook or in the command line (***make sure to run the command in the python environment we just created***)
