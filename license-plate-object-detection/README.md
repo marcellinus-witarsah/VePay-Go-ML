@@ -24,7 +24,4 @@ Then you want to access or activate the environment using this command:
 
 ```python -m pipenv shell```
 
-Next, we need to install libaries to enable pytorch to access GPU by installing python packages by using this command
-***pip install torch==1.9.0+cu102 torchvision==0.10.0+cu102 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html***
-
-This command can be run in the jupyter notebook or in the command line (***make sure to run the command in the python environment we just created***)
+Next, using ```jupyter notebook``` command for launching jupyter notebook and access the file. Next, just follow the steps inside license-plate-object-detection-training.ipynb 
