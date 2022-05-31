@@ -14,11 +14,13 @@ Python environment can be created using [anaconda](https://www.anaconda.com/) or
 
 Copy this folder into your local data or clone the GitHub repo by running command:
 
+```git clone https://github.com/marcellinus-witarsah/VePay-Go-ML.git```
 
+Then setting up the environment at your project directory folder (/license-plate-object-detection) by running this command: 
 
-Then setting up the environment at your project directory folder (/license-plate-object-detection) by running: 
+```python -m pipenv install```
 
-```python -m pipenv --python 3.8.6```
+This command will automatically create an environment and install all dependencies from Pipfile
 
 Then you want to access or activate the environment using this command: 
 
