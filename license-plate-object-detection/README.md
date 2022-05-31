@@ -16,11 +16,9 @@ Copy this folder into your local data or clone the GitHub repo by running comman
 
 ```git clone https://github.com/marcellinus-witarsah/VePay-Go-ML.git```
 
-Then setting up the environment at your project directory folder (/license-plate-object-detection) by running this command: 
+Then setting up the environment at your project directory folder (/license-plate-object-detection) by running this command for automatically create an environment and install all dependencies from Pipfile: 
 
 ```python -m pipenv install```
-
-This command will automatically create an environment and install all dependencies from Pipfile
 
 Then you want to access or activate the environment using this command: 
 
