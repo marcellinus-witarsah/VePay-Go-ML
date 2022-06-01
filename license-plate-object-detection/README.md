@@ -7,6 +7,8 @@ The training of the data will be using NVIDIA GeForce GTX 1660 Ti device. But th
 3. Installing NVIDIA driver from this [link](https://www.nvidia.com/download/index.aspx) and choose the driver based on your GPU device name and type.
 4. Installing Visual Studio 2019 using this [link](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=download+from+relnotes&utm_content=vs2019ga+button) 
 
+*\*This setup maybe only works for certain people, but you have to check your GPU device and OS version to determine which driver, CUDA version, CuDNN version and Visual Studio version to download.*
+
 ## Setting Up Environment
 Python environment can be created using [anaconda](https://www.anaconda.com/) or [pipenv](https://pipenv.pypa.io/en/latest/) package by Python. In this project, pipenv is a tool that has been chosen for setting up environment. For starting things off, download the any Python version from this [link](https://www.python.org/downloads/). After that, go to command line and run command this command for installing pipenv package: 
 
