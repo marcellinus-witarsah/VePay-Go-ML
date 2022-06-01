@@ -16,7 +16,7 @@ predictBtn.addEventListener('click', predict);
 
 // create async function for model initialization
 async function initializeModel(){
-    model = await tf.loadGraphModel('http://127.0.0.1:8887/models/model.json');
+    model = await tf.loadGraphModel('http://127.0.0.1:8887/model3/model.json');
 }
 // initialize model immediately
 initializeModel();
