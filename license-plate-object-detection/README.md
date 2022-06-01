@@ -1,3 +1,4 @@
+# Using Local Machine
 ## Installation for Using NVIDIA GPU Device
 License Plate Object Detection is the part of our Deep Learning Pipeline where we need to identify Region of Interest of the license plate that we want to recognize. Our Object Detection model will be using a ***YOLOv5*** method which has been created by ***[Glenn Jocher](https://www.linkedin.com/in/glenn-jocher/)***. All Credits goes to every people who are involve in bringing YOLOv5 Method to live. The code can be accessed using this link https://github.com/ultralytics/yolov5.
 
@@ -27,3 +28,6 @@ Then you want to access or activate the environment using this command:
 ```python -m pipenv shell```
 
 Next, using ```jupyter notebook``` command for launching jupyter notebook and access the file. Next, just follow the steps inside license-plate-object-detection-training.ipynb 
+
+# Using Google Colab
+If setting up environment, installing drivers, CUDA, and many more is troublesome. You can just go to ```license-plate-object-detection-colab.ipynb``` and run it right away.
