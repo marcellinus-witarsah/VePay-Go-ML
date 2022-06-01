@@ -1,5 +1,5 @@
 ## Installation for Using NVIDIA GPU Device
-License Plate Object Detection is the part of our Deep Learning Pipeline where we need to identify Region of Interest of the license plate that we want to recognize. Our Object Detection model will be using a ***YOLOv5*** method which has been created by ***ultralytics***. All Credits goes to every people who are involve in bringing YOLOv5 Method to live. The code can be accessed using this link https://github.com/ultralytics/yolov5.
+License Plate Object Detection is the part of our Deep Learning Pipeline where we need to identify Region of Interest of the license plate that we want to recognize. Our Object Detection model will be using a ***YOLOv5*** method which has been created by ***[Glenn Jocher](https://www.linkedin.com/in/glenn-jocher/)***. All Credits goes to every people who are involve in bringing YOLOv5 Method to live. The code can be accessed using this link https://github.com/ultralytics/yolov5.
 
 The training of the data will be using NVIDIA GeForce GTX 1660 Ti device. But there are some things that we need to prepare for this project such as:
 1. Installing CUDA Toolkit version 10.2 (use this [link](https://developer.nvidia.com/cuda-10.2-download-archive) for downloading it)
