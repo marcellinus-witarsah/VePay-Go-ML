@@ -1,0 +1,5 @@
+names:
+- license-plate
+nc: 1
+train: ../datasets/vepay-license-plate-detection-1/train/images
+val: ../datasets/vepay-license-plate-detection-1/valid/images
