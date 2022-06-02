@@ -13,7 +13,7 @@ There are 3 major steps approach in order to identify license plate characters a
 We prepared 3 datasets for this project:
 1. **License Plate Object Detection**: Collecting pictures of cars from the internet and on the streets of Jakarta. Then, annotate the region of interest (license plate) dataset for using tool from [Roboflow](https://roboflow.com/). Roboflow supports over [30 formats object detection formats](https://roboflow.com/formats) for conversion.for object detection training purposes.
 2. **Character Segmentation**: Using same dataset for License Plate Object Detection from [Roboflow](https://roboflow.com/). The tool can select whether to export the picture of the data that has been annotated or the full image. For this part, the dataset will be the picture of the license plate only (region of interest).
-3. **Character Recognition**: jangan lupa isi 
+3. **Character Recognition**: **NOT YET BEING FILLED** 
 
 ## Technologies/Languages Used
 - **Python**: This is the most used language for implementing AI projects
