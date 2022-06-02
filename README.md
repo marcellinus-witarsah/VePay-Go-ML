@@ -29,9 +29,10 @@ We prepared 3 datasets for this project:
 
 ## License Plate Object Detection
 The architecture of the model consists of 3 main pieces which are:
-1.	Backbone: The YOLOv5 models use a [Cross Stage Partial Networks](https://arxiv.org/abs/1911.11929) as the backbone to extract informative feature from the input image. 
-2.	Neck: The YOLOv5 models use a [PANet](https://arxiv.org/abs/1803.01534) to get a feature pyramids which helps to generalize and identify object at various sizes and scales.
-3.	Head: Consumes features from the neck and takes box and class prediction steps. It applies anchor boxes on features and and generates final output vectors with class probabilities, objectness scores, and bounding boxes.
+1.	**Backbone:** The YOLOv5 models use a [Cross Stage Partial Networks](https://arxiv.org/abs/1911.11929) as the backbone to extract informative feature from the input image. 
+2.	**Neck**: The YOLOv5 models use a [PANet](https://arxiv.org/abs/1803.01534) to get a feature pyramids which helps to generalize and identify object at various sizes and scales.
+3.	**Head**: Consumes features from the neck and takes box and class prediction steps. It applies anchor boxes on features and and generates final output vectors with class probabilities, objectness scores, and bounding boxes.
+
 
 
 ## Character Segmentation
