@@ -5,9 +5,9 @@ This is a project with a purpose to produce a pipeline which can automatically i
 
 ## Approach
 There are 3 major steps approach in order to identify license plate characters and numbers, those are:
-1. [License Plate Object Detection](## license-plate-object-detection)
-2. [Character Segmentation](## character-segmentation)
-3. [Character Recognition](## character-recognition)
+1. [License Plate Object Detection](##license-plate-object-detection)
+2. [Character Segmentation](##character-segmentation)
+3. [Character Recognition](##character-recognition)
 
 ## Dataset
 We prepared 3 datasets for this project:
