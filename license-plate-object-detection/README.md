@@ -27,7 +27,7 @@ Then you want to access or activate the environment using this command:
 
 ```python -m pipenv shell```
 
-Next, using ```jupyter notebook``` command for launching jupyter notebook and access the file. Next, just follow the steps inside license-plate-object-detection-training.ipynb 
+Next, using ```jupyter notebook``` command for launching jupyter notebook and access the file. Next, just follow the steps inside ```license-plate-object-detection-training.ipynb```
 
 # Using Google Colab
 If setting up environment, installing drivers, CUDA, and many more is troublesome. You can just go to ```license-plate-object-detection-colab.ipynb``` and run it right away by following all steps on the notebook.
