@@ -33,10 +33,16 @@ The architecture of the model consists of 3 main pieces which are:
 2.	**Neck**: The YOLOv5 models use a [PANet](https://arxiv.org/abs/1803.01534) to get a feature pyramids which helps to generalize and identify object at various sizes and scales.
 3.	**Head**: Consumes features from the neck and takes box and class prediction steps. It applies anchor boxes on features and and generates final output vectors with class probabilities, objectness scores, and bounding boxes.
 
+The training from fine-tuning YOLOv5s model achieved  mAP_0.5 of **0.994** and mAP_0.5:0.95 of **0.797**.
 <p align="center">
-    <img src="" alt="Training Result YOLOv5s" height="250">
+    <img src="" alt="Training Result YOLOv5s" height="200">
 </p>
 
+The training from fine-tuning YOLOv5m model achieved  mAP_0.5 of **0.994** and mAP_0.5:0.95 of **0.812**.
+<p align="center">
+    <img src="" alt="Training Result YOLOv5m" height="200">
+</p>
+Sadly, the author of YOLOv5 hasn't published an official paper about their research, all information about the YOLOv5 can be found in the [GitHub](https://github.com/ultralytics/yolov5) and official [blog posts](https://ultralytics.com/blog).
 
 ## Character Segmentation
 ## Character Recognition
