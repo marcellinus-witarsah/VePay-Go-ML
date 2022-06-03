@@ -1,15 +1,13 @@
 import cv2
 import imutils
 import numpy as np
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import img_to_array
+
 import functools
 from pathlib import Path
 import os
 
 def connected(image, showSteps=False):
         image = cv2.imread(image)
-        image = imutils.resize(image, height=250, width=400 )
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         gray = 255-gray
         gray = cv2.bilateralFilter(gray, 11, 17, 17) 
@@ -19,23 +17,23 @@ def connected(image, showSteps=False):
         
         _, labels = cv2.connectedComponents(thresh)
 
-
+        print(labels)
         mask = np.zeros(thresh.shape, dtype="uint8")
 
         # Set lower bound and upper bound criteria for characters
         total_pixels = image.shape[0] * image.shape[1]
-        lower = total_pixels // 150 # heuristic param, can be fine tuned if necessary
-        upper = total_pixels // 10 # heuristic param, can be fine tuned if necessary
+        lower = total_pixels // 170 # heuristic param, can be fine tuned if necessary
+        upper = total_pixels // 5 # heuristic param, can be fine tuned if necessary
         # Loop over the unique components
         for (i, label) in enumerate(np.unique(labels)):
                 # If this is the background label, ignore it
                 if label == 0:
                         continue
-        
                 # Otherwise, construct the label mask to display only connected component
                 # for the current label
                 labelMask = np.zeros(thresh.shape, dtype="uint8")
                 labelMask[labels == label] = 255
+                
                 numPixels = cv2.countNonZero(labelMask)
         
                 # If the number of pixels in the component is between lower bound and upper bound, 
@@ -89,7 +87,7 @@ def crop(charpic):
 def detect_plate(imag, showSteps = False):
         image = cv2.imread(imag)
        
-        image = imutils.resize(image, width=300)
+        image = cv2.resize(image, (300,130))
 
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         gray = 255-gray
@@ -134,10 +132,10 @@ def detect_plate(imag, showSteps = False):
 
 def main():
         path = os.path.join(Path().absolute(), "src_img") # Directory of current working directory, not __file__ 
-        a = detect_plate(os.path.join(path,"test_img.jpg"), showSteps=True)
-        if a is not -1:
-                a = str(a) + ".jpg"
-                mask = connected(a, showSteps=False)
+        a = detect_plate(os.path.join(path,"test_img.jpg"), showSteps=False)
+        # if a is not -1:
+        #         a = str(a) + ".jpg"
+        #         mask = connected(a, showSteps=True)
 
         cv2.waitKey(0)
 if __name__=="__main__":

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenCV.js</title>
+    <style>
+    /* display loading gif and hide webpage */
+    .modal {
+        display:    none;
+        position:   fixed;
+        z-index:    1000;
+        top:        0;
+        left:       0;
+        height:     100%;
+        width:      100%;
+        background: rgba( 255, 255, 255, .8) 
+                    url('http://i.stack.imgur.com/FhHRx.gif') 
+                    50% 50% 
+                    no-repeat;
+    }
+
+    /* prevent scrollbar from display during load */
+    body.loading {
+        overflow: hidden;   
+    }
+
+    /* display the modal when loading class is added to body */
+    body.loading .modal {
+        display: block;
+    } 
+    </style>
+  
+</head>
+<body>
+    <input type="file" id="fileInput" name="file" />
+    <img id="imageSrc" alt="No Image" />
+    <canvas id="imageCanvas"></canvas>
+    <button type="button" id="startOpenCV" class="btn btn-primary">OpenCV Start</button>
+  <!-- Our HTML will go here-->
+  <div class="modal">
+  </div>
+
+  <script type="text/javascript">
+    // Using Open CV JS "https://docs.opencv.org/3.3.1/opencv.js"
+
+    document.body.classList.add('loading');
+      
+    function onOpenCvReady() {
+    document.body.classList.remove('loading');
+    }
+    
+    let imgElement = document.getElementById('imageSrc');
+    let inputElement = document.getElementById('fileInput');
+    inputElement.onchange = function() {
+    imgElement.src = URL.createObjectURL(event.target.files[0]);
+    };  
+    imgElement.onload = function() {
+      
+    let image = cv.imread(imgElement);
+    cv.imshow('imageCanvas', image);
+    image.delete();
+    document.getElementById('startOpenCV').onclick = function() {
+    
+    };
+
+    document.getElementById('startOpenCV').onclick = function() {
+    this.disabled = true;
+    document.body.classList.add('loading');
+
+  
+   
+  // img_array = ... (ARRAY PASSING DARI LU YA CEL BISA DITARO DISINI) 
+   //let srcMat = cv.matFromArray(img_array.length, img_array[0].length, cv.CV_8UC3, [].concat(...img_array));
+
+    let srcMat = cv.imread('imageCanvas'); // KLO UDAH INI BISA DICOMMENT DISINI
+
+    let size =  srcMat.size();
+    size.height = 130
+    size.width = 300
+    cv.resize(srcMat,srcMat,size);
+    let displayMat = srcMat.clone();
+    cv.cvtColor(srcMat, srcMat, cv.COLOR_BGR2GRAY);
+    cv.bitwise_not(srcMat, srcMat);
+    cv.adaptiveThreshold(srcMat, srcMat, 255,
+	cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY_INV, 43, 9);
+    let M = cv.Mat.ones(3, 3, cv.CV_8U);
+    let anchor = new cv.Point(-1, -1);
+    cv.erode(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    cv.dilate(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    cv.dilate(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    cv.erode(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    //cv.imshow('imageCanvas', srcMat)
+    
+    let blackMat = new cv.Mat.zeros(size, cv.CV_8U);
+    let mask = blackMat.clone();
+
+    //console.log(tes)
+    let markers = new cv.Mat();
+    let labels = cv.connectedComponents(srcMat, markers,8);
+    let total_pixel = size.height * size.width;
+    let min_pixel = total_pixel / 300;
+    let max_pixel = total_pixel / 5;
+
+    for (let i = 1 ; i < labels; i++){
+      let mask_temp = blackMat.clone();
+      let testing = i;
+      let near_border = 0;
+      for (let col = 0; col < 130; col++){
+         let a = col
+        for (let row = 0 ; row < 300; row++ ){
+           let b = row
+            if (markers.ucharPtr(a,b)[0] == testing){
+              mask_temp.ucharPtr(a,b)[0] = 255;
+              if (a <= 10 || a >= 100 || b <= 10 || b >= 280) near_border = 1;
+          } 
+        }   
+      }
+      if (near_border == 1) continue;
+      let num_Pixels = cv.countNonZero(mask_temp);
+      if (num_Pixels > min_pixel && num_Pixels < max_pixel)
+             cv.add(mask_temp, mask, mask);
+   }
+    cv.imshow('imageCanvas', mask);
+    
+    let contours = new cv.MatVector();
+    let hierarchy = new cv.Mat();
+    
+
+    cv.findContours(mask.clone(), contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+    let minContourArea = 30;
+    let color = new cv.Scalar(0, 255,0);
+    let char = new cv.Mat();
+    let rect = cv.boundingRect(contours.get(0));
+    let a = rect.x-2
+    let array = [{cntr_idx:0, cntr_start_pos:a}];
+    // sort
+    for (let i = 1 ; i < contours.size(); ++i){
+      let rect = cv.boundingRect(contours.get(i));
+      let pos_x = rect.x-2;
+      array.push({cntr_idx:i, cntr_start_pos:pos_x})
+    }
+    array.sort(function(a, b){return a.cntr_start_pos - b.cntr_start_pos});
+
+    let output_array = [];
+    for (let i = 0; i < contours.size() ;  ++i){
+      output_array = []
+      let cntr_size =  blackMat.size();
+      char = blackMat.clone();
+      let cnt = contours.get(array[i].cntr_idx);
+      let rect = cv.boundingRect(cnt);
+      let rectangleColor = new cv.Scalar(0, 0, 0);
+      cv.drawContours(mask, contours, i, color, 1, 8, hierarchy, 1);
+      let pos_x = rect.x-2;
+      let pos_y = rect.y-2;
+      let point1 = new cv.Point(pos_x, pos_y);
+      let point2 = new cv.Point(rect.x + rect.width+2, rect.y + rect.height+2);
+      cntr_size.height = rect.height+4
+      cntr_size.width = rect.width+4
+      cv.resize(char,char,cntr_size);
+      cv.rectangle(mask, point1, point2, rectangleColor, 2, cv.LINE_AA, 0);
+      let a = 0;
+      for (let cnt_x = pos_x ; cnt_x <= rect.x + rect.width+2; cnt_x++){
+        let b = 0;
+        for (let cnt_y = pos_y; cnt_y <= rect.y + rect.height+2; cnt_y++){
+             char.ucharPtr(b,a)[0] = mask.ucharPtr(cnt_y, cnt_x)[0];
+             b += 1;
+        } 
+        a +=  1;
+      }
+      cntr_size.height = 100
+      cntr_size.width = 70
+      cv.resize(char, char,cntr_size)
+      output_array = []
+      a = 0
+      for (let i = 0 ; i < char.rows; i++ ){
+        output_array.push(char.ucharPtr(i))
+      }
+      // let ctx = imgElement.getContext("2d");
+      // let imageData = ctx.createImageData(char.cols, char.rows);
+      // imageData.data.set(new Uint8ClampedArray(char.data, char.cols, char.rows));
+
+
+
+
+      console.log(output_array)
+
+      
+      delete pos_x, pos_y, point1, point2;
+    }
+    
+    cv.imshow('imageCanvas', char);
+
+    char.delete(); srcMat.delete(); contours.delete(); hierarchy.delete(); mask.delete(); blackMat.delete(); displayMat.delete();
+
+    this.disabled = false;
+    document.body.classList.remove('loading');
+        
+};
+    
+    };
+  </script>
+  <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript">
+  </script>
+  
+
+</body>
+</html>
