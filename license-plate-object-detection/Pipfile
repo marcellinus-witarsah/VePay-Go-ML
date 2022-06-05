@@ -10,6 +10,8 @@ pyyaml = "*"
 utils = "*"
 tensorflowjs = "*"
 wandb = "*"
+flask = "*"
+gdown = "*"
 
 [dev-packages]
 
