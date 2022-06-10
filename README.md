@@ -67,14 +67,14 @@ The architecture of the model consists of 3 main pieces which are:
 Sadly, the author of YOLOv5 hasn't published an official paper about their research, all information about the YOLOv5 can be found in the [GitHub](https://github.com/ultralytics/yolov5) and official [blog posts](https://ultralytics.com/blog). The model will potentially be used is YOLOv5s version since its lightweight model with almost the same mAP as the YOLOv5m version. Next, we need to set the confidence level for each model which can be seen in Figure 5 and Figure 6.
 
 <p align="center">
-    <img src="license-plate-object-detection/images/train_vlpd1_5m_scratch_metrics.png" alt="F1 Training Result YOLOv5s" height="500">
+    <img src="license-plate-object-detection/images/train_vlpd1_5s_scratch_f1_curve.png" alt="F1 Training Result YOLOv5s" height="500">
     <p align="center">
         Figure 5: Training process for YOLOv5m model at each epochs.
     </p>
 </p>
 <br/>
 <p align="center">
-    <img src="license-plate-object-detection/images/train_result_yolov5m_scratch.jpg" alt="F1 Training Result YOLOv5m" height="200">
+    <img src="license-plate-object-detection/images/train_vlpd1_5m_scratch_f1_curve.png" alt="F1 Training Result YOLOv5m" height="200">
     <p align="center">
         Figure 6: The training from fine-tuning YOLOv5m model achieved mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.812</b>.
     </p>
