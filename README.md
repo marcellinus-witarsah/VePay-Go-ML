@@ -64,6 +64,7 @@ The architecture of the model consists of 3 main pieces which are:
     </p>
 </p>
 <br/>
+
 Sadly, the author of YOLOv5 hasn't published an official paper about their research, all information about the YOLOv5 can be found in the [GitHub](https://github.com/ultralytics/yolov5) and official [blog posts](https://ultralytics.com/blog). The model will potentially be used is YOLOv5s version since its lightweight model with almost the same mAP as the YOLOv5m version.
 
 ## Character Segmentation
