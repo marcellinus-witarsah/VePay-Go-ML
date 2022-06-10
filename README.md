@@ -1,4 +1,7 @@
-# License Plate Object Identification
+<p align="center">
+  <h1 align="center">License Plate Object Identification</h1>
+</p>
+
 
 ## Introduction
 This is a project with a purpose to produce a pipeline which can automatically identify and recognize license plate characters and numbers from an image obtained from video, surveillance cameras, etc. This project can be applied to all kind of thing involve license plate identification for vehicle payment system, tracking and finding cars, etc.
