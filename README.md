@@ -33,20 +33,21 @@ The architecture of the model consists of 3 main pieces which are:
 2.	**Neck**: The YOLOv5 models use a [PANet](https://arxiv.org/abs/1803.01534) to get a feature pyramids which helps to generalize and identify object at various sizes and scales.
 3.	**Head**: Consumes features from the neck and takes box and class prediction steps. It applies anchor boxes on features and and generates final output vectors with class probabilities, objectness scores, and bounding boxes.
 
-The training from fine-tuning YOLOv5s model achieved  mAP_0.5 of **0.994** and mAP_0.5:0.95 of **0.797**.
+
 <p align="center">
     <img src="license-plate-object-detection/images/train_vlpd1_5s_scratch_metrics.png" alt="Training Result YOLOv5s" height="500">
 </p>
 <p align="center">
     <img src="license-plate-object-detection/images/train_result_yolov5s_scratch.jpg" alt="Training Result YOLOv5s" height="200">
+    <label> The training from fine-tuning YOLOv5s model achieved  mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.797</b>. </label>
 </p>
 
-The training from fine-tuning YOLOv5m model achieved  mAP_0.5 of **0.994** and mAP_0.5:0.95 of **0.812**.
 <p align="center">
     <img src="license-plate-object-detection/images/train_vlpd1_5m_scratch_metrics.png" alt="Training Result YOLOv5s" height="500">
 </p>
 <p align="center">
     <img src="license-plate-object-detection/images/train_result_yolov5m_scratch.jpg" alt="Training Result YOLOv5m" height="200">
+    <label> The training from fine-tuning YOLOv5m model achieved  mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.812</b>. </label>
 </p>
 
 Sadly, the author of YOLOv5 hasn't published an official paper about their research, all information about the YOLOv5 can be found in the [GitHub](https://github.com/ultralytics/yolov5) and official [blog posts](https://ultralytics.com/blog). The model will potentially be used is YOLOv5s version since its lightweight model with almost the same mAP as the YOLOv5m version.
