@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenCV.js</title>
+    <style>
+    /* display loading gif and hide webpage */
+    .modal {
+        display:    none;
+        position:   fixed;
+        z-index:    1000;
+        top:        0;
+        left:       0;
+        height:     100%;
+        width:      100%;
+        background: rgba( 255, 255, 255, .8) 
+                    url('http://i.stack.imgur.com/FhHRx.gif') 
+                    50% 50% 
+                    no-repeat;
+    }
+
+    /* prevent scrollbar from display during load */
+    body.loading {
+        overflow: hidden;   
+    }
+
+    /* display the modal when loading class is added to body */
+    body.loading .modal {
+        display: block;
+    } 
+    </style>
+  
+</head>
+<body>
+    <input type="file" id="fileInput" name="file" />
+    <img id="imageSrc" alt="No Image" />
+    <canvas id="imageCanvas"></canvas>
+    <button type="button" id="startOpenCV" class="btn btn-primary">OpenCV Start</button>
+  <!-- Our HTML will go here-->
+  <div class="modal">
+  </div>
+
+  <script type="text/javascript">
+    // Using Open CV JS "https://docs.opencv.org/3.3.1/opencv.js"
+
+    document.body.classList.add('loading');
+      
+    function onOpenCvReady() {
+    document.body.classList.remove('loading');
+    }
+    
+    let imgElement = document.getElementById('imageSrc');
+    let inputElement = document.getElementById('fileInput');
+    inputElement.onchange = function() {
+    imgElement.src = URL.createObjectURL(event.target.files[0]);
+    };  
+    imgElement.onload = function() {
+      
+    let image = cv.imread(imgElement);
+    cv.imshow('imageCanvas', image);
+    image.delete();
+    document.getElementById('startOpenCV').onclick = function() {
+    
+    };
+
+    document.getElementById('startOpenCV').onclick = function() {
+    this.disabled = true;
+    document.body.classList.add('loading');
+
+  
+   
+   //let srcMat = cv.matFromArray(img_array.length, img_array[0].length, cv.CV_8UC3, [].concat(...img_array));  // read from an array input
+    let srcMat = cv.imread('imageCanvas'); // read from an image input
+
+    // Set the size into 300 x 130
+    let size =  srcMat.size();
+    size.height = 130
+    size.width = 300
+    cv.resize(srcMat,srcMat,size);
+  
+    let displayMat = srcMat.clone();
+    cv.cvtColor(srcMat, srcMat, cv.COLOR_BGR2GRAY); // Grayscale the image
+    cv.bitwise_not(srcMat, srcMat); // Invert the image
+    
+    // Threshold the image into a binary
+    cv.adaptiveThreshold(srcMat, srcMat, 255,
+	cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY_INV, 43, 9);
+
+    // Filter the image with erode and dilate
+    let M = cv.Mat.ones(3, 3, cv.CV_8U);
+    let anchor = new cv.Point(-1, -1);
+    cv.erode(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    cv.dilate(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    cv.dilate(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    cv.erode(srcMat, srcMat, M, anchor, 1,
+               cv.BORDER_CONSTANT, cv.morphologyDefaultBorderValue());
+    
+    // Create a black image format
+    let blackMat = new cv.Mat.zeros(size, cv.CV_8U);
+
+    let mask = blackMat.clone();
+    let markers = new cv.Mat();
+
+    // Check all of the groups of white pixels with connectedComponents
+    let labels = cv.connectedComponents(srcMat, markers,8);
+    let total_pixel = size.height * size.width;  // Total pixel of the image
+    let min_pixel = total_pixel / 300;  // heuristic param, can be fine tuned if necessary, used to set lower boundary of pixels
+    let max_pixel = total_pixel / 5;    // heuristic param, can be fine tuned if necessary, used to set lower boundary of pixels
+
+    for (let i = 1 ; i < labels; i++){
+      let mask_temp = blackMat.clone();
+      let cur_group = i;
+      let near_border = 0;
+      // Filter the image from border noises
+      for (let col = 0; col < 130; col++){
+         let a = col
+        for (let row = 0 ; row < 300; row++ ){
+           let b = row
+            if (markers.ucharPtr(a,b)[0] == cur_group){
+              mask_temp.ucharPtr(a,b)[0] = 255;
+              if (a <= 10 || a >= 100 || b <= 10 || b >= 280) near_border = 1;
+          } 
+        }   
+      }
+      if (near_border == 1) continue;
+      // If the number of pixels in the component is between lower bound and upper bound, add it to mask
+      let num_Pixels = cv.countNonZero(mask_temp);
+      if (num_Pixels > min_pixel && num_Pixels < max_pixel)
+             cv.add(mask_temp, mask, mask);
+   }
+    
+    let contours = new cv.MatVector();
+    let hierarchy = new cv.Mat();
+    
+    // Find contours of the masked image
+    cv.findContours(mask.clone(), contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+    
+    let color = new cv.Scalar(0, 255,0);
+    let char = new cv.Mat();
+    let rect = cv.boundingRect(contours.get(0));  // Get the rectangle ROI from the first contour
+    let a = rect.x-2
+    let array = [{cntr_idx:0, cntr_start_pos:a}]; // Array to sort all the contours
+    
+    // Sort the contours from left to right
+    for (let i = 1 ; i < contours.size(); ++i){
+      let rect = cv.boundingRect(contours.get(i));
+      let pos_x = rect.x-2;
+      array.push({cntr_idx:i, cntr_start_pos:pos_x})
+    }
+    array.sort(function(a, b){return a.cntr_start_pos - b.cntr_start_pos});
+
+    // Convert the detected contours into an array to pass to character recognition
+    let output_array = [];
+    for (let i = 0; i < contours.size() ;  ++i){
+      output_array = []
+      let cntr_size =  blackMat.size();
+      char = blackMat.clone();
+
+      let cnt = contours.get(array[i].cntr_idx);  // Take each of the contours into cnt variable
+
+      // Create the rectangle from the contours
+      let rect = cv.boundingRect(cnt);
+      let rectangleColor = new cv.Scalar(0, 0, 0);
+
+      cv.drawContours(mask, contours, i, color, 1, 8, hierarchy, 1);  // Draw the contours into mask
+      
+      // Set the pointers for the rectange 
+      let pos_x = rect.x-2;
+      let pos_y = rect.y-2;
+      let point1 = new cv.Point(pos_x, pos_y);
+      let point2 = new cv.Point(rect.x + rect.width+2, rect.y + rect.height+2);
+
+      // Resize the image
+      cntr_size.height = rect.height+4;
+      cntr_size.width = rect.width+4;
+      cv.resize(char,char,cntr_size);
+
+      cv.rectangle(mask, point1, point2, rectangleColor, 2, cv.LINE_AA, 0); // Draw the rectangle into the mask
+      let a = 0;
+      for (let cnt_x = pos_x ; cnt_x <= rect.x + rect.width+2; cnt_x++){
+        let b = 0;
+        for (let cnt_y = pos_y; cnt_y <= rect.y + rect.height+2; cnt_y++){
+             char.ucharPtr(b,a)[0] = mask.ucharPtr(cnt_y, cnt_x)[0];  // Add all of the detected characters into char matrix
+             b += 1;
+        } 
+        a +=  1;
+      }
+
+      // Resize the detected characters into 75x100
+      cntr_size.height = 100
+      cntr_size.width = 75
+      cv.resize(char, char,cntr_size)
+
+      // Input all of the detected characters into output_array list
+      output_array = []
+      a = 0
+      for (let i = 0 ; i < char.rows; i++ ){
+        output_array.push(char.ucharPtr(i))
+      }
+
+      console.log(output_array)
+      delete pos_x, pos_y, point1, point2;
+    }
+    
+    cv.imshow('imageCanvas', char);
+    char.delete(); srcMat.delete(); contours.delete(); hierarchy.delete(); mask.delete(); blackMat.delete(); displayMat.delete();
+
+    this.disabled = false;
+    document.body.classList.remove('loading');
+        
+};
+    
+    };
+  </script>
+  <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript">
+  </script>
+  
+
+</body>
+</html>
