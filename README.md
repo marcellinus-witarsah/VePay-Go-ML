@@ -35,10 +35,16 @@ The architecture of the model consists of 3 main pieces which are:
 
 The training from fine-tuning YOLOv5s model achieved  mAP_0.5 of **0.994** and mAP_0.5:0.95 of **0.797**.
 <p align="center">
+    <img src="license-plate-object-detection/images/train_vlpd1_5s_scratch_metrics.png" alt="Training Result YOLOv5s" height="200">
+</p>
+<p align="center">
     <img src="license-plate-object-detection/images/train_result_yolov5s_scratch.jpg" alt="Training Result YOLOv5s" height="200">
 </p>
 
 The training from fine-tuning YOLOv5m model achieved  mAP_0.5 of **0.994** and mAP_0.5:0.95 of **0.812**.
+<p align="center">
+    <img src="license-plate-object-detection/images/train_vlpd1_5m_scratch_metrics.png" alt="Training Result YOLOv5s" height="200">
+</p>
 <p align="center">
     <img src="license-plate-object-detection/images/train_result_yolov5m_scratch.jpg" alt="Training Result YOLOv5m" height="200">
 </p>
