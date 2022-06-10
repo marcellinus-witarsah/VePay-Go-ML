@@ -36,20 +36,28 @@ The architecture of the model consists of 3 main pieces which are:
 
 <p align="center">
     <img src="license-plate-object-detection/images/train_vlpd1_5s_scratch_metrics.png" alt="Training Result YOLOv5s" height="500">
-    <label>Figure 1: Training process for YOLOv5s model at each epochs.</label>
+    </p align="center">
+        <label>Figure 1: Training process for YOLOv5s model at each epochs.</label>
+    </p>
 </p>
 <p align="center">
     <img src="license-plate-object-detection/images/train_result_yolov5s_scratch.jpg" alt="Training Result YOLOv5s" height="200">
-    <label>Figure 2: The training from fine-tuning YOLOv5s model achieved mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.797</b>.</label>
+    <p align="center">
+        <label>Figure 2: The training from fine-tuning YOLOv5s model achieved mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.797</b>.</label>
+    </p>
 </p>
 
 <p align="center">
     <img src="license-plate-object-detection/images/train_vlpd1_5m_scratch_metrics.png" alt="Training Result YOLOv5s" height="500">
-    <label>Figure 3: Training process for YOLOv5m model at each epochs.</label>
+    <p align="center">
+        <label>Figure 3: Training process for YOLOv5m model at each epochs.</label>
+    </p>
 </p>
 <p align="center">
     <img src="license-plate-object-detection/images/train_result_yolov5m_scratch.jpg" alt="Training Result YOLOv5m" height="200">
-    <label>Figure 4: The training from fine-tuning YOLOv5m model achieved mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.812</b>.</label>
+    <p align="center">
+        <label>Figure 4: The training from fine-tuning YOLOv5m model achieved mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.812</b>.</label>
+    </p>
 </p>
 
 Sadly, the author of YOLOv5 hasn't published an official paper about their research, all information about the YOLOv5 can be found in the [GitHub](https://github.com/ultralytics/yolov5) and official [blog posts](https://ultralytics.com/blog). The model will potentially be used is YOLOv5s version since its lightweight model with almost the same mAP as the YOLOv5m version.
