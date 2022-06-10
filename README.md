@@ -36,10 +36,9 @@ The architecture of the model consists of 3 main pieces which are:
 2.	**Neck**: The YOLOv5 models use a [PANet](https://arxiv.org/abs/1803.01534) to get a feature pyramids which helps to generalize and identify object at various sizes and scales.
 3.	**Head**: Consumes features from the neck and takes box and class prediction steps. It applies anchor boxes on features and and generates final output vectors with class probabilities, objectness scores, and bounding boxes.
 
-
 <p align="center">
     <img src="license-plate-object-detection/images/train_vlpd1_5s_scratch_metrics.png" alt="Training Result YOLOv5s" height="500">
-    </p align="center">
+    <p align="center">
         Figure 1: Training process for YOLOv5s model at each epochs.
     </p>
 </p>
