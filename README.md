@@ -64,21 +64,23 @@ The architecture of the model consists of 3 main pieces which are:
 </p>
 <br/>
 
-Sadly, the author of YOLOv5 hasn't published an official paper about their research, all information about the YOLOv5 can be found in the [GitHub](https://github.com/ultralytics/yolov5) and official [blog posts](https://ultralytics.com/blog). The model will potentially be used is YOLOv5s version since its lightweight model with almost the same mAP as the YOLOv5m version. Next, we need to set the confidence level for each model which can be seen in Figure 5 and Figure 6.
+Sadly, the author of YOLOv5 hasn't published an official paper about their research, all information about the YOLOv5 can be found in the [GitHub](https://github.com/ultralytics/yolov5) and official [blog posts](https://ultralytics.com/blog). The model will potentially be used is YOLOv5s version since its lightweight model with almost the same mAP as the YOLOv5m version. Next, we need to set the confidence level for each model which can be seen in Figure 5 and Figure 6. Confidence level of 0.71 for YOLOv5s license plate object detection model and 0.74 for YOLOv5m license plate object detection model.
 
 <p align="center">
     <img src="license-plate-object-detection/images/train_vlpd1_5s_scratch_f1_curve.png" alt="F1 Training Result YOLOv5s" height="300">
     <p align="center">
-        Figure 5: Training process for YOLOv5m model at each epochs.
+        Figure 5: F1 score with at every confidence level at YOLOv5s model.
     </p>
 </p>
 <br/>
 <p align="center">
     <img src="license-plate-object-detection/images/train_vlpd1_5m_scratch_f1_curve.png" alt="F1 Training Result YOLOv5m" height="300">
     <p align="center">
-        Figure 6: The training from fine-tuning YOLOv5m model achieved mAP_0.5 of <b>0.994</b> and mAP_0.5:0.95 of <b>0.812</b>.
+        Figure 6: F1 score with at every confidence level at YOLOv5m model.
     </p>
 </p>
+
+
 
 ## Character Segmentation
 Models are divided to two main parts, which are:
