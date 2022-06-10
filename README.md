@@ -48,4 +48,4 @@ Sadly, the author of YOLOv5 hasn't published an official paper about their resea
 ## Character Segmentation
 ## Character Recognition
 
-***The website demo for the Machine Learning Service only are available by visiting this GitHub (link)[https://github.com/marcellinus-witarsah/VePay-Go-ML-Demo]***
+***The website demo for the Machine Learning Service only are available by visiting this GitHub [link](https://github.com/marcellinus-witarsah/VePay-Go-ML-Demo)***
