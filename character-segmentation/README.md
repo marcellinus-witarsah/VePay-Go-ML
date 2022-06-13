@@ -4,7 +4,7 @@
 This is an API used to segmentate the characters from the given detected license plate obtained from license-plate-object-detection API. There are 2 programs provided, char_segmentations.py for python and opencv_js folder for the javascript version of the program.
 
 ## Requirements
-- Python 3.8.0 and up
+- Python installed in Local Machine
 
 ## Libraries
 - OpenCV
