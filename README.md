@@ -15,7 +15,7 @@ There are 3 major steps approach in order to identify license plate characters a
 We prepared 3 datasets for this project:
 1. **License Plate Object Detection**: Collecting pictures of cars from the internet and on the streets of Jakarta. Then, annotate the region of interest (license plate) dataset for using tool from [Roboflow](https://roboflow.com/). Roboflow supports over [30 formats object detection formats](https://roboflow.com/formats) for conversion.for object detection training purposes.
 2. **Character Segmentation**: Using same dataset for License Plate Object Detection from [Roboflow](https://roboflow.com/). The tool can select whether to export the picture of the data that has been annotated or the full image. For this part, the dataset will be the picture of the license plate only (region of interest).
-3. **Character Recognition**: **NOT YET BEING FILLED** 
+3. **Character Recognition**: The dataset used to train this model are images that have been processed from character segmentation. Dataset and models are available in https://drive.google.com/drive/folders/1cMs2hPC2Q68fapTyEMK4ZFPChrrEUtuO?usp=sharing
 
 ## Technologies/Languages Used
 - **Python**: This is the most used language for implementing AI projects
@@ -88,7 +88,12 @@ Models are divided to two main parts, which are:
 2. Filter the white pixels to determine whether it is a noise or a characters with **OpenCV** and give the Region of Interest of detected characters into Character Recoginition API. 
 
 ## Character Recognition
-
+Character recognition model is built with TensorFlow and Keras in Python. The model has 95% of validation accuracy after 100 epoch.
+To get the inference result, the step is:
+1. Images from character segmentation resized to 64x64.
+2. Images should converted to (64,64,1) arrray because the model could only receive grayscale images.
+3. Array passed to model, and then the inference output are in onehot. 
+4. To get the string result, onehot data should be decoded by dictionary provided in the testing notebook.
 
 # Result
 The website demo for the Machine Learning Service only are available by visiting this GitHub [link](https://github.com/marcellinus-witarsah/VePay-Go-ML-Demo)
