@@ -83,7 +83,8 @@ Sadly, the author of YOLOv5 hasn't published an official paper about their resea
 
 
 ## Character Segmentation
-Models are divided to two main parts, which are:
+Character Segmentation are build with **OpenCV** library. Character segmentation works with taking input of detected license plate array and sepaarate it based on its characters. The model are divided to two main parts, which are:
+
 1. Using **OpenCV** library to preprocess the RGB image into a binary image consist of *black* and *white* pixels. *black* as the background image and *white* as the detected characters. 
 2. Filter the white pixels to determine whether it is a noise or a characters with **OpenCV** and give the Region of Interest of detected characters into Character Recoginition API. 
 
